@@ -13,7 +13,10 @@ namespace WebAPI.Services.Impl
         private readonly ITopicRepository topicRepository;
         private readonly IMapper mapper;
 
-        public FeedbackService(IContactRepository contactRepository, IMessageRepository messageRepository, ITopicRepository topicRepository, IMapper mapper)
+        public FeedbackService(IContactRepository contactRepository, 
+            IMessageRepository messageRepository, 
+            ITopicRepository topicRepository, 
+            IMapper mapper)
         {
             this.contactRepository = contactRepository;
             this.messageRepository = messageRepository;

@@ -34,9 +34,7 @@ export class AppComponent {
             "topic.name": new FormControl("", Validators.required),
             "message.text": new FormControl("", Validators.required)
         })
-        console.log(this.form.invalid);
     }
-    
     onSendFeedbackClick() {
         this.feedbackService.sendFeedback(this.feedbackOut)
             .subscribe(value => this.feedbackIn = value);
@@ -46,18 +44,10 @@ export class AppComponent {
         this.feedbackIn = null;
         this.feedbackOut = AppComponent.emptyFeedback();
     }
-    
     private static emptyFeedback(): FeedbackOut {
         return  new FeedbackOut(
             new Contact(),
             new Topic(),
             new Message());
     }
-
-    /*    public resolved(captchaResponse: string): void {
-        console.log(`Resolved captcha with response: ${captchaResponse}`);
-    }
-    public onError(errorDetails: RecaptchaErrorParameters): void {
-        console.log(`reCAPTCHA error encountered; details:`, errorDetails);
-    }*/
 }
