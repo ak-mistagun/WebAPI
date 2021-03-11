@@ -3,3 +3,7 @@
 ################################################################################
 
 /.idea/.idea.WebAPI/.idea
+/.vs/WebAPI
+/WebAPI/bin/Debug/net5.0
+/WebAPI/ClientApp/node_modules
+/WebAPI/obj
