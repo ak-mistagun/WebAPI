@@ -1,6 +1,6 @@
 import { Topic } from '../topic'
 
-export class TopicIn extends Topic {
+export class TopicResponse extends Topic {
     public id?: number;
     
     constructor(

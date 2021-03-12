@@ -1,10 +1,10 @@
-using WebAPI.Mappings.Dto.In;
-using WebAPI.Mappings.Dto.Out;
+using WebAPI.Mappings.Dto.Request;
+using WebAPI.Mappings.Dto.Response;
 
 namespace WebAPI.Services
 {
     public interface IFeedbackService
     {
-        public FeedbackOutDto Create(FeedbackInDto dto);
+        public FeedbackResponseDto Create(FeedbackRequestDto feedback);
     }
 }

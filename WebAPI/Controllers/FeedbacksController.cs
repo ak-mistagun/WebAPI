@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Mappings.Dto.In;
+using WebAPI.Mappings.Dto.Request;
 using WebAPI.Services;
 
 namespace WebAPI.Controllers
@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateFeedback([FromBody] FeedbackInDto dto)
+        public IActionResult CreateFeedback([FromBody] FeedbackRequestDto dto)
         {
             return Created("", feedbackService.Create(dto));
         }

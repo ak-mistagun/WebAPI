@@ -22,15 +22,18 @@
     <TypeScriptCompile Include="ClientApp\angular.json" />
     <TypeScriptCompile Include="ClientApp\src\app\app.componet.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\app.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\feedback.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\contact.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\in\contact.in.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\in\feedback.in.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\in\message.in.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\in\topic.in.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\response\contact.response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\response\feedback.response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\response\message.response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\response\topic.response.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\message.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\out\feedback.out.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\request\feedback.request.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\topic.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\contact.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\feedback.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\message.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\topic.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\main.ts" />
     <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
   </ItemGroup>

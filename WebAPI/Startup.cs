@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.SpaServices.Extensions;
 using WebAPI.Mappings;
 using WebAPI.Repositories;
 using WebAPI.Repositories.Impl;
@@ -64,6 +63,9 @@ namespace WebAPI
 
 			// Services registers.
 			services.AddScoped<IFeedbackService, FeedbackService>();
+			services.AddScoped<IContactService, ContactService>();
+			services.AddScoped<ITopicService, TopicService>();
+			services.AddScoped<IMessageService, MessageService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

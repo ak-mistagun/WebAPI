@@ -3,26 +3,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebAPI.Database;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
+using DbContext = WebAPI.Database.DbContext;
 
 namespace WebAPI.Repositories.Impl
 {
     public class CrudRepository<TId, TModel> : ICrudRepository<TId, TModel> 
         where TId : IComparable<TId>
-        where TModel : BaseModel<TId>
+        where TModel : BaseEntity<TId>
     {
         protected readonly DbContext Context;
 
         public CrudRepository(DbContext context) => Context = context;
+        
+        public virtual IEnumerable<TModel> All() => Context.Set<TModel>();
 
-        public IEnumerable<TModel> All() => Context.Set<TModel>();
-
-        public virtual TModel Create(TModel model)
+        public virtual TModel Create(TModel entity)
         {
-            var result = Context.Set<TModel>().Add(model).Entity;
-            Context.SaveChanges();
-            return result;
+            return Context.Set<TModel>().Add(entity).Entity;
         }
 
         public virtual TModel? Read(TId id)
@@ -30,12 +29,11 @@ namespace WebAPI.Repositories.Impl
             return Context.Set<TModel>().FirstOrDefault(m => m.Id.CompareTo(id) == 0);
         }
 
-        public virtual TModel Update(TModel model)
+        public virtual TModel Update(TModel entity)
         {
-            if (Read(model.Id) is null) return Create(model);
+            if (Read(entity.Id) is null) return Create(entity);
             
-            var update = Context.Entry(model).Entity;
-            Context.SaveChanges();
+            var update = Context.Entry(entity).Entity;
             return update;
 
         }
@@ -45,7 +43,6 @@ namespace WebAPI.Repositories.Impl
             if (Read(id) is not { } model) return;
             
             Context.Set<TModel>().Remove(model);
-            Context.SaveChanges();
         }
 
         public void Save() => Context.SaveChanges();

@@ -1,14 +1,17 @@
 import { Contact } from '../contact'
 
-export class ContactIn extends Contact {
+export class ContactResponse extends Contact {
     public id: number;
+    public messageIds: number[];
     
     constructor(
         id?: number,
         name?: string,
         email?: string,
-        telephone?: string) {
+        telephone?: string,
+        messageIds?: number[]) {
         super(name, email, telephone);
         this.id = id;
+        this.messageIds = messageIds;
     }
 }

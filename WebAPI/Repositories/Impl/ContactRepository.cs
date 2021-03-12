@@ -1,8 +1,10 @@
 #nullable enable
 
+using System.Collections.Generic;
 using System.Linq;
-using WebAPI.Database;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
+using DbContext = WebAPI.Database.DbContext;
 
 namespace WebAPI.Repositories.Impl
 {
@@ -15,7 +17,15 @@ namespace WebAPI.Repositories.Impl
 
         public Contact? FindByEmailAndTelephone(string email, string telephone)
         {
-            return Context.Contacts.FirstOrDefault(contact => contact.Email == email && contact.Telephone == telephone);
+            return Context.Contacts
+                .Include(contact => contact.Messages)
+                .FirstOrDefault(contact => contact.Email == email && contact.Telephone == telephone);
+        }
+
+        public override IEnumerable<Contact> All()
+        {
+            return Context.Contacts
+                .Include(contact => contact.Messages);
         }
     }
 }
