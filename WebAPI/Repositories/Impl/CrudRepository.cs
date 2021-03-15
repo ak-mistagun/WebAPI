@@ -3,9 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using WebAPI.Database;
 using WebAPI.Models;
-using DbContext = WebAPI.Database.DbContext;
 
 namespace WebAPI.Repositories.Impl
 {

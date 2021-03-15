@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Controllers.Filters;
 using WebAPI.Mappings.Dto.Request;
 using WebAPI.Services;
 
@@ -16,6 +17,7 @@ namespace WebAPI.Controllers
             this.feedbackService = feedbackService;
         }
 
+        [TopicNotFoundExceptionFilter]
         [HttpPost]
         public IActionResult CreateFeedback([FromBody] FeedbackRequestDto dto)
         {
