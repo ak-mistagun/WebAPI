@@ -39,4 +39,17 @@
     <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\src\polyfills.js.map" />
+    <None Remove="ClientApp\src\polyfills.js" />
+    <None Remove="ClientApp\src\main.js" />
+    <None Remove="ClientApp\src\app\services\feedback.service.js" />
+    <None Remove="ClientApp\src\app\services\contact.service.js.map" />
+    <None Remove="ClientApp\src\app\services\contact.service.js" />
+    <None Remove="ClientApp\src\app\models\response\contact.response.js" />
+    <None Remove="ClientApp\src\app\models\message.js.map" />
+    <None Remove="ClientApp\src\app\app.module.js.map" />
+    <None Remove="ClientApp\src\app\app.module.js" />
+  </ItemGroup>
+
 </Project>
