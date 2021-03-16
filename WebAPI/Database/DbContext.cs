@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WebAPI.Models;
 
 namespace WebAPI.Database
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbContext(DbContextOptions options) 
+        public DbContext(IConfiguration cfg, DbContextOptions options) 
             : base(options)
         {
             Database.EnsureCreated();

@@ -12,6 +12,7 @@ using WebAPI.Repositories;
 using WebAPI.Repositories.Impl;
 using WebAPI.Services;
 using WebAPI.Services.Impl;
+using WebAPI.Untils;
 using WebDbContext = WebAPI.Database.DbContext;
 
 namespace WebAPI
@@ -19,8 +20,6 @@ namespace WebAPI
     public class Startup
     {
 	    private const string MsSqlConnectionString = nameof(MsSqlConnectionString);
-	    private const string IsInMemoryDatabase = nameof(IsInMemoryDatabase);
-	    private const string IsAngularActive = nameof(IsAngularActive);
 		
 		public Startup(IConfiguration cfg)
 		{
@@ -36,7 +35,7 @@ namespace WebAPI
 			services.AddSingleton(new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()))
 				.CreateMapper());
 
-			if (Cfg.GetValue<bool>(IsInMemoryDatabase))
+			if (Cfg.IsInMemoryDatabase())
 			{
 				services.AddDbContext<WebDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
 			}
@@ -47,7 +46,7 @@ namespace WebAPI
 			}
 
 			// Angular
-			if (Cfg.GetValue<bool>(IsAngularActive))
+			if (Cfg.IsAngularActive())
 				services.AddSpaStaticFiles(cfg => cfg.RootPath = "ClientApp/dist");
 			
 			services.AddControllers();
@@ -77,18 +76,14 @@ namespace WebAPI
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
 			}
-			else
-			{
-				app.UseExceptionHandler("/error");
-			}
 
 			// Angular
-			if (Cfg.GetValue<bool>(IsAngularActive))
+			if (Cfg.IsAngularActive())
 			{
 				app.UseStaticFiles();
 				app.UseSpaStaticFiles();
 			}
-			
+
 			app.UseHttpsRedirection();
 			app.UseRouting();
 			app.UseAuthorization();
@@ -98,7 +93,7 @@ namespace WebAPI
 			});
 			
 			// Angular
-			if (Cfg.GetValue<bool>(IsAngularActive))
+			if (Cfg.IsAngularActive())
 			{
 				app.UseSpa(spa =>
 				{

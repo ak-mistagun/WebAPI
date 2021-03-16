@@ -2,8 +2,12 @@
 # Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
 ################################################################################
 
-/.idea/.idea.WebAPI/.idea
-/.vs/WebAPI
-/WebAPI/bin/Debug/net5.0
-/WebAPI/ClientApp/node_modules
+/.idea/**
+/.vs/**
+/WebAPI/bin
+/WebAPI/bin/**
 /WebAPI/obj
+/WebAPI/obj/**
+/WebAPI/ClientApp/node_modules
+/WebAPI/ClientApp/dist
+
