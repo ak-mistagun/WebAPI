@@ -1,6 +1,5 @@
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Mappings.Dto.Response;
 using WebAPI.Services;
 
 namespace WebAPI.Controllers
@@ -17,6 +16,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll()
         {
             return new ObjectResult(contactService.All());

@@ -1,4 +1,5 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using WebAPI.Mappings.Dto.Request;
 using WebAPI.Mappings.Dto.Response;
@@ -11,20 +12,28 @@ namespace WebAPI.Services.Impl
 {
     public class FeedbackService: IFeedbackService
     {
+        private readonly IFeedbackRepository feedbackRepository;
         private readonly IContactRepository contactRepository;
         private readonly IMessageRepository messageRepository;
         private readonly ITopicRepository topicRepository;
         private readonly IMapper mapper;
 
-        public FeedbackService(IContactRepository contactRepository, 
+        public FeedbackService(IFeedbackRepository feedbackRepository,
+            IContactRepository contactRepository, 
             IMessageRepository messageRepository, 
             ITopicRepository topicRepository, 
             IMapper mapper)
         {
+            this.feedbackRepository = feedbackRepository;
             this.contactRepository = contactRepository;
             this.messageRepository = messageRepository;
             this.topicRepository = topicRepository;
             this.mapper = mapper;
+        }
+
+        public IEnumerable<FeedbackResponseDto> All()
+        {
+            return feedbackRepository.All().Select(feedback => mapper.Map<FeedbackResponseDto>(feedback));
         }
 
         public FeedbackResponseDto Create(FeedbackRequestDto feedback)

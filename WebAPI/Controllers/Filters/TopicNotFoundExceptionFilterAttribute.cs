@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using WebAPI.Services.Exceptions;
 
 namespace WebAPI.Controllers.Filters
 {
@@ -7,7 +8,7 @@ namespace WebAPI.Controllers.Filters
     {
         public override void OnException(ExceptionContext context)
         {
-            if (context.Exception is Services.Exceptions.TopicNotFoundException ex)
+            if (context.Exception is TopicNotFoundException ex)
             {
                 context.Result = new ContentResult
                 {

@@ -1,22 +1,20 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using WebAPI.Models;
 
 namespace WebAPI.Database
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbContext(IConfiguration cfg, DbContextOptions options) 
+        public DbContext(DbContextOptions<DbContext> options) 
             : base(options)
         {
             Database.EnsureCreated();
         }
 
+        public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-
-        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Message>()
@@ -29,9 +27,9 @@ namespace WebAPI.Database
             
             // default topics.
             modelBuilder.Entity<Topic>().HasData(
-                new Topic {Id = 1, Name = "first"}, 
-                new Topic {Id = 2, Name = "second"}, 
-                new Topic {Id = 3, Name = "third"});
+                new Topic { Id = 1, Name = "technical support" }, 
+                new Topic { Id = 2, Name = "sales" }, 
+                new Topic { Id = 3, Name = "other" });
         }
     }
 }

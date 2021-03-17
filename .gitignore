@@ -10,4 +10,11 @@
 /WebAPI/obj/**
 /WebAPI/ClientApp/node_modules
 /WebAPI/ClientApp/dist
+/WebAPI/wwwroot/**
+/WebAPI/ClientApp/src/*.js
+/WebAPI/ClientApp/src/app/*.js
+/WebAPI/ClientApp/src/app/models/*.js
+/WebAPI/ClientApp/src/app/models/request/*.js
+/WebAPI/ClientApp/src/app/models/response/*.js
+/WebAPI/ClientApp/src/app/services/*.js
 

@@ -47,7 +47,7 @@ namespace WebAPI
 
 			// Angular
 			if (Cfg.IsAngularActive())
-				services.AddSpaStaticFiles(cfg => cfg.RootPath = "ClientApp/dist");
+				services.AddSpaStaticFiles(cfg => cfg.RootPath = "wwwroot");
 			
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
@@ -56,6 +56,7 @@ namespace WebAPI
 			});
 			
 			// Repositories registers.
+			services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 			services.AddScoped<ITopicRepository, TopicRepository>();
 			services.AddScoped<IMessageRepository, MessageRepository>();
 			services.AddScoped<IContactRepository, ContactRepository>();

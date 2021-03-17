@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FeedbackRequest} from "./models/request/feedback.request";
-import {FormControl, FormGroup, SelectControlValueAccessor, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 import {Contact} from "./models/contact";
 import {Message} from "./models/message";
@@ -66,7 +66,6 @@ export class AppComponent implements OnInit {
     onSendFeedbackClick() {
         this.feedbackService.sendFeedback(this.feedbackRequest)
             .subscribe(value => this.feedbackResponses.push(value));
-        console.log(this.feedbackResponses);
         this.onFeedbackClick();
     }
     
@@ -78,7 +77,10 @@ export class AppComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.topicService.all().subscribe(value => this.topics = value as TopicResponse[]);
+        this.topicService.all()
+            .subscribe(value => this.topics = value as TopicResponse[]);
+        this.feedbackService.all()
+            .subscribe(value => this.feedbackResponses = value as FeedbackResponse[]);
     }
 
     onSelectedChange(event: any) {
@@ -86,22 +88,26 @@ export class AppComponent implements OnInit {
     }
     
     public onContactClick() {
-        this.contactService.all().subscribe(value => this.contacts = value as ContactResponse[]);
-        
+        this.contactService.all()
+            .subscribe(value => this.contacts = value as ContactResponse[]);
         this.type = 'contacts';
     }
     
     public onTopicClick() {
-        this.topicService.all().subscribe(value => this.topics = value as TopicResponse[]);
+        this.topicService.all()
+            .subscribe(value => this.topics = value as TopicResponse[]);
         this.type = 'topics';
     }
     
     public onMessageClick() {
-        this.messageService.all().subscribe(value => this.messages = value as MessageResponse[]);
+        this.messageService.all()
+            .subscribe(value => this.messages = value as MessageResponse[]);
         this.type = 'messages';
     }
     
     public onFeedbackClick() {
+        this.feedbackService.all()
+            .subscribe(value => this.feedbackResponses = value as FeedbackResponse[]);
         this.type = 'feedbacks';
     }
     

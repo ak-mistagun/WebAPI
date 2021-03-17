@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Controllers.Filters;
 using WebAPI.Mappings.Dto.Request;
@@ -17,8 +18,15 @@ namespace WebAPI.Controllers
             this.feedbackService = feedbackService;
         }
 
+        [HttpGet]
+        public IActionResult All()
+        {
+            return new ObjectResult(feedbackService.All());
+        }
+        
         [TopicNotFoundExceptionFilter]
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult CreateFeedback([FromBody] FeedbackRequestDto dto)
         {
             return Created("", feedbackService.Create(dto));
