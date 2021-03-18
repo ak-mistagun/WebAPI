@@ -3,14 +3,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Database;
 using WebAPI.Models;
-using DbContext = WebAPI.Database.DbContext;
 
 namespace WebAPI.Repositories.Impl
 {
     public class ContactRepository : CrudRepository<int, Contact>, IContactRepository
     {
-        public ContactRepository(DbContext context) 
+        public ContactRepository(WebApiDbContext context) 
             : base(context)
         {
         }

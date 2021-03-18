@@ -7,6 +7,6 @@ namespace WebAPI.Services
     public interface IFeedbackService
     {
         public IEnumerable<FeedbackResponseDto> All();
-        public FeedbackResponseDto Create(FeedbackRequestDto feedback);
+        public FeedbackResponseDto Create(FeedbackRequestDto feedbackRequestDto);
     }
 }

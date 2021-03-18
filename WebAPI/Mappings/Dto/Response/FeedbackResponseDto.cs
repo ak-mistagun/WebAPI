@@ -4,6 +4,9 @@ namespace WebAPI.Mappings.Dto.Response
 {
     public sealed class FeedbackResponseDto
     {
+        [Required] 
+        public int Id { get; init; }
+
         [Required]
         public ContactResponseDto Contact { get; init; }
         

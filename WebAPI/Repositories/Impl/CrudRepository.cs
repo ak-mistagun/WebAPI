@@ -12,9 +12,9 @@ namespace WebAPI.Repositories.Impl
         where TId : IComparable<TId>
         where TModel : BaseEntity<TId>
     {
-        protected readonly DbContext Context;
+        protected readonly WebApiDbContext Context;
 
-        public CrudRepository(DbContext context) => Context = context;
+        public CrudRepository(WebApiDbContext context) => Context = context;
         
         public virtual IEnumerable<TModel> All() => Context.Set<TModel>();
 

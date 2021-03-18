@@ -7,13 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WebAPI.Database;
 using WebAPI.Mappings;
 using WebAPI.Repositories;
 using WebAPI.Repositories.Impl;
 using WebAPI.Services;
 using WebAPI.Services.Impl;
 using WebAPI.Untils;
-using WebDbContext = WebAPI.Database.DbContext;
 
 namespace WebAPI
 {
@@ -37,11 +37,11 @@ namespace WebAPI
 
 			if (Cfg.IsInMemoryDatabase())
 			{
-				services.AddDbContext<WebDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
+				services.AddDbContext<WebApiDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
 			}
 			else
 			{
-				services.AddDbContext<WebDbContext>(options =>
+				services.AddDbContext<WebApiDbContext>(options =>
 					options.UseSqlServer(Cfg.GetConnectionString(MsSqlConnectionString)));
 			}
 
@@ -81,6 +81,7 @@ namespace WebAPI
 			// Angular
 			if (Cfg.IsAngularActive())
 			{
+				app.UseDefaultFiles();
 				app.UseStaticFiles();
 				app.UseSpaStaticFiles();
 			}
@@ -99,7 +100,7 @@ namespace WebAPI
 				app.UseSpa(spa =>
 				{
 					spa.Options.SourcePath = "ClientApp";
-					spa.UseAngularCliServer("start"); 
+					if (env.IsDevelopment()) spa.UseAngularCliServer("start"); 
 				});
 			}
 		}

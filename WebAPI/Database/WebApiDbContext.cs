@@ -3,12 +3,11 @@ using WebAPI.Models;
 
 namespace WebAPI.Database
 {
-    public class DbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class WebApiDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbContext(DbContextOptions<DbContext> options) 
+        public WebApiDbContext(DbContextOptions<WebApiDbContext> options) 
             : base(options)
         {
-            Database.EnsureCreated();
         }
 
         public DbSet<Feedback> Feedbacks { get; set; }

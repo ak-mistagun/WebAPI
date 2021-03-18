@@ -8,7 +8,7 @@ namespace WebAPI.Repositories.Impl
 {
     public class TopicRepository : CrudRepository<int, Topic>, ITopicRepository
     {
-        public TopicRepository(DbContext context) 
+        public TopicRepository(WebApiDbContext context) 
             : base(context)
         {
         }

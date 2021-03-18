@@ -33,24 +33,39 @@ namespace WebAPI.Services.Impl
 
         public IEnumerable<FeedbackResponseDto> All()
         {
-            return feedbackRepository.All().Select(feedback => mapper.Map<FeedbackResponseDto>(feedback));
+            return feedbackRepository.All()
+                .Select(feedback => new FeedbackResponseDto
+                {
+                    Id = feedback.Id,
+                    Contact = mapper.Map<ContactResponseDto>(feedback.Contact),
+                    Topic = mapper.Map<TopicResponseDto>(feedback.Topic),
+                    Message = mapper.Map<MessageResponseDto>(feedback.Message)
+                });
         }
 
-        public FeedbackResponseDto Create(FeedbackRequestDto feedback)
+        public FeedbackResponseDto Create(FeedbackRequestDto feedbackRequestDto)
         {
-            var contact = contactRepository.FindByEmailAndTelephone(feedback.Contact.Email, feedback.Contact.Telephone) ??
-                          contactRepository.Create(mapper.Map<Contact>(feedback.Contact));
-            var topic = topicRepository.FindByName(feedback.Topic.Name)
-                .OrElseThrow(() => new TopicNotFoundException($"Topic with name {feedback.Topic.Name} not found"));
-            var message = messageRepository.Create(mapper.Map<Message>(feedback.Message));
-
+            var contact = contactRepository.FindByEmailAndTelephone(feedbackRequestDto.Contact.Email, feedbackRequestDto.Contact.Telephone) ??
+                          contactRepository.Create(mapper.Map<Contact>(feedbackRequestDto.Contact));
+            var topic = topicRepository.FindByName(feedbackRequestDto.Topic.Name)
+                .OrElseThrow(() => new TopicNotFoundException($"Topic with name {feedbackRequestDto.Topic.Name} not found"));
+            var message = messageRepository.Create(mapper.Map<Message>(feedbackRequestDto.Message));
+            
             message.ChangeContact(contact.AddMessage(message))
                 .ChangeTopic(topic);
-
+            
+            feedbackRepository.Create(new Feedback()
+            {
+                Contact = contact,
+                Topic = topic,
+                Message = message
+            });
+            
+            feedbackRepository.Save();
             contactRepository.Save();
             topicRepository.Save();
             messageRepository.Save();
-                
+            
             return new FeedbackResponseDto
             {
                 Contact = mapper.Map<ContactResponseDto>(contact),

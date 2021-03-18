@@ -87,6 +87,7 @@
     <table class="table table-dark table-striped" *ngIf="feedbackResponses.length > 0">
         <thead>
         <tr>
+            <td class="col">id</td>
             <td class="col">contact.id</td>
             <td class="col">contact.name</td>
             <td class="col">contact.email</td>
@@ -100,6 +101,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let feedback of feedbackResponses">
+            <td>{{feedback.id}}</td>
             <td>{{feedback.contact.id}}</td>
             <td>{{feedback.contact.name}}</td>
             <td>{{feedback.contact.email}}</td>
